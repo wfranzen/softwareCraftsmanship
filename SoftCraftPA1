@@ -1,0 +1,64 @@
+//Will Franzen (wcf13)
+//Software Craftsmanship - Programming Assignment 1
+/* Using iteration: return a list containing the longest, smallest prefix of a list "a" whose elements are
+less than or equal to the corresponding elements of a list "b". */
+import java.util.*;
+
+
+public class SoftCraftPA1 {
+
+    static <T> List<T> longestSmallerPrefix(List<T> a, List<T> b, Comparator<? super T> cmp) {
+
+        //Initializing the list of the longest smallest prefix and parameter list iterators
+        List<T> lspList = new ArrayList<>();
+        Iterator<T> iterA = a.iterator();
+        Iterator<T> iterB = b.iterator();
+
+        //Creating placeholders to access the value of iterators in the while loop
+        T placeholderA;
+        T placeholderB;
+
+        //Loop until bounds are reached or element comparison condition is met
+        while(iterA.hasNext() && iterB.hasNext()) {
+
+            //Iterate through lists and use placeholders to compare value
+            placeholderA = iterA.next();
+            placeholderB = iterB.next();
+
+            //Comparison condition; If element of a > element of b return -1 or 0, otherwise return current lsp
+            if(cmp.compare(placeholderA, placeholderB) < 1) {
+                lspList.add(placeholderA);
+            } else {
+                return lspList;
+            }
+        }
+        //If bounds are reached and loop not killed, return current list
+        return lspList;
+     }
+
+}
+
+
+
+
+
+
+//Main method I created to test
+
+/*
+public static void main (String[] args) {
+
+        List<String> a = new ArrayList<>();
+        a.add("1"); a.add("2"); a.add("3"); a.add("4");
+
+        List<String> b = new ArrayList<>();
+        b.add("1"); b.add("2"); b.add("4"); b.add("3");
+
+        Comparator<String> cmp = Comparator.naturalOrder();
+
+        List<String> LSP = longestSmallerPrefix(a, b, cmp);
+        for(String i : LSP) {
+            System.out.print(i + ", ");
+        }
+    }
+ */
